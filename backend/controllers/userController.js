@@ -6,6 +6,7 @@ exports.signup = async (req, res) => {
     const { username, password } = req.body;
     
     if (!username || !password) {
+        console.log('Username and password are required');
         return res.status(400).json({ message: 'Username and password are required' });
     }
     
@@ -17,6 +18,7 @@ exports.signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     users.push({ username, password: hashedPassword });
 
+    console.log(`User Registered: ${username}`);
     res.status(201).json({ message: 'User registered successfully' });
 };
 
@@ -25,13 +27,16 @@ exports.login = async (req, res) => {
     
     const user = users.find(user => user.username === username);
     if (!user) {
+        console.log(`User not found: ${username}`);
         return res.status(400).json({ message: 'Invalid username or password' });
     }
     
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
+        console.log(`Invalid password for user: ${username}`);
         return res.status(400).json({ message: 'Invalid username or password' });
     }
+<<<<<<< HEAD
     
     const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
     res.json({ message: 'Login successful', token });
@@ -40,4 +45,8 @@ exports.login = async (req, res) => {
 // ✅ FIX: Add and Export getProfile function
 exports.getProfile = (req, res) => {
     res.json({ message: `Welcome, ${req.user.username}! This is your profile.` });
+=======
+    console.log(`User logged in: ${username}`);
+    res.json({ message: 'Login successful' });
+>>>>>>> 539f52ebed5962756ab37dfcea0dcea4a4bd82d0
 };
