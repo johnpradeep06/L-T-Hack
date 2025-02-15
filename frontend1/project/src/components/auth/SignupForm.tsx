@@ -11,6 +11,7 @@ import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"
 import { Link } from "react-router-dom"
 import { toast, ToastContainer } from "react-toastify" // Import toast and ToastContainer
 import "react-toastify/dist/ReactToastify.css" // Import toast styles
+import image from "@/components/auth/signup.jpg"; // Import image
 
 export function SignupForm() {
   const [username, setUsername] = useState("")
@@ -57,68 +58,82 @@ export function SignupForm() {
   return (
     <>
       <ToastContainer /> {/* Add ToastContainer */}
-      <div className="flex items-center justify-center min-h-screen mx-auto p-4">
-        <Card className="w-full max-w-md">
-          <CardHeader>
-            <h2 className="text-2xl font-bold text-center">Create Account</h2>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="username">Username</Label>
-                <Input
-                  id="username"
-                  type="text"
-                  placeholder="Choose a username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                  className="w-full"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Choose a password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className="w-full"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="confirmPassword">Confirm Password</Label>
-                <Input
-                  id="confirmPassword"
-                  type="password"
-                  placeholder="Confirm your password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                  className="w-full"
-                />
-              </div>
-              {error && (
-                <Alert variant="destructive">
-                  <AlertDescription>{error}</AlertDescription>
-                </Alert>
-              )}
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? "Creating Account..." : "Sign Up"}
-              </Button>
-            </form>
-          </CardContent>
-          <CardFooter className="flex flex-col space-y-2 text-center">
-            <div className="text-sm text-gray-500">
-              Already have an account?{" "}
-              <Link to="/login" className="text-blue-600 hover:underline">
-                Log in here
-              </Link>
-            </div>
-          </CardFooter>
-        </Card>
+      <div className="flex items-center justify-center min-h-screen w-full bg-gray-100">
+        <div className="flex w-full max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden h-[500px]">
+          {/* Form Section */}
+          <div className="w-1/2 flex items-center justify-center p-6">
+            <Card className="w-full max-w-md">
+              <CardHeader>
+                <h2 className="text-2xl font-bold text-center">Create Account</h2>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="username">Username</Label>
+                    <Input
+                      id="username"
+                      type="text"
+                      placeholder="Choose a username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="password">Password</Label>
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="Choose a password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className="w-full"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="confirmPassword">Confirm Password</Label>
+                    <Input
+                      id="confirmPassword"
+                      type="password"
+                      placeholder="Confirm your password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                      className="w-full"
+                    />
+                  </div>
+                  {error && (
+                    <Alert variant="destructive">
+                      <AlertDescription>{error}</AlertDescription>
+                    </Alert>
+                  )}
+                  <Button type="submit" className="w-full" disabled={loading}>
+                    {loading ? "Creating Account..." : "Sign Up"}
+                  </Button>
+                </form>
+              </CardContent>
+              <CardFooter className="flex flex-col space-y-2 text-center">
+                <div className="text-sm text-gray-500">
+                  Already have an account?{" "}
+                  <Link to="/login" className="text-blue-600 hover:underline">
+                    Log in here
+                  </Link>
+                </div>
+              </CardFooter>
+            </Card>
+          </div>
+
+          {/* Image Section */}
+          <div className="w-1/2 h-full">
+            <img
+              src={image} // Change this to your actual image path
+              alt="Signup visual"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
       </div>
     </>
   )
